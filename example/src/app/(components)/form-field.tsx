@@ -1,4 +1,11 @@
-import { Checkbox, DropShadowView, FormField, Switch } from 'heroui-native';
+import {
+  Checkbox,
+  DropShadowView,
+  FormField,
+  Switch,
+  cn,
+  useTheme,
+} from 'heroui-native';
 import React from 'react';
 import { View } from 'react-native';
 import { ScreenScrollView } from '../../components/screen-scroll-view';
@@ -22,7 +29,7 @@ export default function FormFieldScreen() {
 
   // Vertical orientation states
   const [verticalSwitch, setVerticalSwitch] = React.useState(false);
-  const [verticalCheckbox, setVerticalCheckbox] = React.useState(true);
+  const [verticalCheckbox, setVerticalCheckbox] = React.useState(false);
 
   // Disabled states
   const [disabledSwitch, setDisabledSwitch] = React.useState(true);
@@ -35,12 +42,14 @@ export default function FormFieldScreen() {
   const [startAlign, setStartAlign] = React.useState(true);
   const [endAlign, setEndAlign] = React.useState(false);
 
+  const { isDark } = useTheme();
+
   return (
     <ScreenScrollView contentContainerClassName="gap-16">
       <SectionTitle title="Basic Switch FormField" />
       <FormField isSelected={notifications} onSelectedChange={setNotifications}>
         <FormField.Content>
-          <FormField.Label>Enable notifications</FormField.Label>
+          <FormField.Title>Enable notifications</FormField.Title>
           <FormField.Description>
             Receive push notifications about your account activity
           </FormField.Description>
@@ -54,7 +63,7 @@ export default function FormFieldScreen() {
       <View className="gap-8">
         <FormField isSelected={darkMode} onSelectedChange={setDarkMode}>
           <FormField.Content>
-            <FormField.Label>Dark mode</FormField.Label>
+            <FormField.Title>Dark mode</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Switch />
@@ -63,7 +72,7 @@ export default function FormFieldScreen() {
 
         <FormField isSelected={autoUpdate} onSelectedChange={setAutoUpdate}>
           <FormField.Content>
-            <FormField.Label>Enable automatic updates</FormField.Label>
+            <FormField.Title>Enable automatic updates</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Switch color="success" />
@@ -75,7 +84,7 @@ export default function FormFieldScreen() {
       <View className="gap-8">
         <FormField isSelected={newsletter} onSelectedChange={setNewsletter}>
           <FormField.Content>
-            <FormField.Label>Subscribe to newsletter</FormField.Label>
+            <FormField.Title>Subscribe to newsletter</FormField.Title>
             <FormField.Description>
               Get weekly updates about new features and tips
             </FormField.Description>
@@ -87,7 +96,7 @@ export default function FormFieldScreen() {
 
         <FormField isSelected={marketing} onSelectedChange={setMarketing}>
           <FormField.Content>
-            <FormField.Label>Marketing communications</FormField.Label>
+            <FormField.Title>Marketing communications</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Checkbox />
@@ -99,7 +108,7 @@ export default function FormFieldScreen() {
       <View className="flex-row flex-wrap gap-6">
         <FormField isSelected={option1} onSelectedChange={setOption1} isInline>
           <FormField.Content>
-            <FormField.Label>WiFi</FormField.Label>
+            <FormField.Title>WiFi</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Switch />
@@ -108,7 +117,7 @@ export default function FormFieldScreen() {
 
         <FormField isSelected={option2} onSelectedChange={setOption2} isInline>
           <FormField.Content>
-            <FormField.Label>Bluetooth</FormField.Label>
+            <FormField.Title>Bluetooth</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Switch />
@@ -117,7 +126,7 @@ export default function FormFieldScreen() {
 
         <FormField isSelected={option3} onSelectedChange={setOption3} isInline>
           <FormField.Content>
-            <FormField.Label>Location</FormField.Label>
+            <FormField.Title>Location</FormField.Title>
           </FormField.Content>
           <FormField.Indicator>
             <Switch />
@@ -133,7 +142,7 @@ export default function FormFieldScreen() {
           orientation="vertical"
         >
           <FormField.Content>
-            <FormField.Label>Vertical Switch Layout</FormField.Label>
+            <FormField.Title>Vertical Switch Layout</FormField.Title>
             <FormField.Description>
               The control appears above the text content in this layout
             </FormField.Description>
@@ -149,13 +158,13 @@ export default function FormFieldScreen() {
           orientation="vertical"
         >
           <FormField.Content>
-            <FormField.Label>Vertical Checkbox Layout</FormField.Label>
+            <FormField.Title>Vertical Checkbox Layout</FormField.Title>
             <FormField.Description>
               Perfect for cards or when you want the control to be prominent
             </FormField.Description>
           </FormField.Content>
           <FormField.Indicator>
-            <Checkbox color="danger" />
+            <Checkbox color="success" />
           </FormField.Indicator>
         </FormField>
       </View>
@@ -168,7 +177,7 @@ export default function FormFieldScreen() {
           alignIndicator="start"
         >
           <FormField.Content>
-            <FormField.Label>Control on the left</FormField.Label>
+            <FormField.Title>Control on the left</FormField.Title>
             <FormField.Description>
               The indicator is aligned to the start (left side)
             </FormField.Description>
@@ -184,7 +193,7 @@ export default function FormFieldScreen() {
           alignIndicator="end"
         >
           <FormField.Content>
-            <FormField.Label>Control on the right (default)</FormField.Label>
+            <FormField.Title>Control on the right (default)</FormField.Title>
             <FormField.Description>
               The indicator is aligned to the end (right side)
             </FormField.Description>
@@ -203,7 +212,7 @@ export default function FormFieldScreen() {
           isDisabled
         >
           <FormField.Content>
-            <FormField.Label>Disabled control</FormField.Label>
+            <FormField.Title>Disabled control</FormField.Title>
             <FormField.Description>
               This entire field is disabled and cannot be interacted with
             </FormField.Description>
@@ -222,9 +231,9 @@ export default function FormFieldScreen() {
           isInvalid={!terms}
         >
           <FormField.Content>
-            <FormField.Label>
+            <FormField.Title>
               I agree to the terms and conditions
-            </FormField.Label>
+            </FormField.Title>
             <FormField.Description>
               By checking this box, you agree to our Terms of Service and
               Privacy Policy
@@ -244,7 +253,7 @@ export default function FormFieldScreen() {
           isInvalid={!privacyAccepted}
         >
           <FormField.Content>
-            <FormField.Label>Accept Privacy Policy</FormField.Label>
+            <FormField.Title>Accept Privacy Policy</FormField.Title>
             <FormField.Description>
               You must accept our privacy policy to create an account
             </FormField.Description>
@@ -263,7 +272,7 @@ export default function FormFieldScreen() {
           isInvalid={dataSharing}
         >
           <FormField.Content>
-            <FormField.Label>Share usage data</FormField.Label>
+            <FormField.Title>Share usage data</FormField.Title>
             <FormField.Description>
               Help improve our product by sharing anonymous usage data
             </FormField.Description>
@@ -285,10 +294,10 @@ export default function FormFieldScreen() {
           className="bg-surface-2 p-4 rounded-lg border border-border"
         >
           <FormField.Content>
-            <FormField.Label classNames={{ text: 'text-lg font-semibold' }}>
+            <FormField.Title className="text-lg font-semibold">
               Premium Feature
-            </FormField.Label>
-            <FormField.Description classNames={{ text: 'text-sm' }}>
+            </FormField.Title>
+            <FormField.Description className="text-sm">
               This is a premium feature with custom styling
             </FormField.Description>
           </FormField.Content>
@@ -300,7 +309,7 @@ export default function FormFieldScreen() {
         <DropShadowView
           shadowSize="xl"
           shadowColor="orange"
-          className="bg-white rounded-xl"
+          className={cn('bg-white rounded-xl', isDark && 'bg-black')}
         >
           <FormField
             isSelected={darkMode}
@@ -308,10 +317,10 @@ export default function FormFieldScreen() {
             className="bg-accent/10 p-4 rounded-xl"
           >
             <FormField.Content className="gap-1.5">
-              <FormField.Label classNames={{ text: 'text-accent font-bold' }}>
+              <FormField.Title className="text-accent font-bold">
                 Highlighted Option
-              </FormField.Label>
-              <FormField.Description classNames={{ text: 'text-amber-600' }}>
+              </FormField.Title>
+              <FormField.Description className="text-amber-600">
                 This option has custom background and text colors
               </FormField.Description>
             </FormField.Content>

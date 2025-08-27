@@ -12,7 +12,7 @@ export default function TextFieldScreen() {
   const [testFieldValue, setTestFieldValue] = useState('');
 
   return (
-    <KeyboardAvoidingView behavior="padding">
+    <KeyboardAvoidingView behavior="padding" className="flex-1 bg-background">
       <ScreenScrollView
         contentContainerClassName="gap-16"
         keyboardShouldPersistTaps="handled"
@@ -123,9 +123,7 @@ export default function TextFieldScreen() {
             size="sm"
             className="self-start"
           >
-            <Button.Label>
-              {isTestFieldInvalid ? 'Make Valid' : 'Make Invalid'}
-            </Button.Label>
+            {isTestFieldInvalid ? 'Make Valid' : 'Make Invalid'}
           </Button>
         </View>
       </ScreenScrollView>
